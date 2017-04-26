@@ -1,0 +1,180 @@
+<section id="welcome">
+	<div class="container">
+		<h2>Find a ride</h2>
+		<hr class="sep">
+		<img class="img-responsive center-block wow fadeInUp" data-wow-delay=".3s" src="img/welcome/logo.png" alt="logo">
+		<h3>Love getting there</h3>
+	</div>
+</section>
+
+<div class="container">
+	<!-- <div ng-show="messageLogin" id="login-alert" class="alert alert-danger col-sm-12">{{messageLogin}}</div> -->
+
+	<form class="form-horizontal row" role="form">
+
+		<div style="margin-bottom: 25px;" class="form-group col-md-5" >
+			<!-- <input  type="text" class="form-control" name="src" ng-model="src" required placeholder="Pick-up point">  -->
+			<input style="padding: 28px 30px; font-size: 17px;" id="autocompletesrc" class="form-control" name="src" ng-model="src" required placeholder="Pick-up point"  type="text"></input>
+
+		</div>
+
+		<div style="margin-bottom: 25px; margin-left: 10px" class="form-group col-md-5">
+			<!-- <input type="text" class="form-control" name="des" ng-model="des" required placeholder="Drop-off point">  -->
+			<input style="padding: 28px 30px; font-size: 17px;" id="autocompletedes" class="form-control" name="des" ng-model="des" required placeholder="Drop-off point"  type="text"></input>
+		</div>
+		<button style="margin-bottom: 25px; margin-left: 10px" class="btn btn-dark col-md-2" ng-click="find()">Find a ride</button>
+	</form>
+	<div class="row">
+		<div class="col-md-3" style="border: 3px solid black;">
+			<div >
+				<h2 class="main-column-title">Date</h2>
+				<form method="GET" class="date-form u-marginNone">
+					<div class="date-facet-input">
+						<input type="text" placeholder="dd/mm/yyyy">
+					</div>
+				</form>
+			</div>
+
+			<div>
+				<div>
+					<form class="form-inline" method="GET">
+						<div data-type="hours" >
+							<select id="hb" name="hb">
+								<option value="0" selected="selected">0h</option>
+								<option value="1">1h</option>
+								<option value="2">2h</option>
+								<option value="3">3h</option>
+								<option value="4">4h</option>
+								<option value="5">5h</option>
+								<option value="6">6h</option>
+								<option value="7">7h</option>
+								<option value="8">8h</option>
+								<option value="9">9h</option>
+								<option value="10">10h</option>
+								<option value="11">11h</option>
+								<option value="12">12h</option>
+								<option value="13">13h</option>
+								<option value="14">14h</option>
+								<option value="15">15h</option>
+								<option value="16">16h</option>
+								<option value="17">17h</option>
+								<option value="18">18h</option>
+								<option value="19">19h</option>
+								<option value="20">20h</option>
+								<option value="21">21h</option>
+								<option value="22">22h</option>
+								<option value="23">23h</option>
+								<option value="24" disabled="disabled">24h</option>
+							</select>
+							<select id="he" name="he">
+								<option value="0" disabled="disabled">0h</option>
+								<option value="1">1h</option>
+								<option value="2">2h</option>
+								<option value="3">3h</option>
+								<option value="4">4h</option>
+								<option value="5">5h</option>
+								<option value="6">6h</option>
+								<option value="7">7h</option>
+								<option value="8">8h</option>
+								<option value="9">9h</option>
+								<option value="10">10h</option>
+								<option value="11">11h</option>
+								<option value="12">12h</option>
+								<option value="13">13h</option>
+								<option value="14">14h</option>
+								<option value="15">15h</option>
+								<option value="16">16h</option>
+								<option value="17">17h</option>
+								<option value="18">18h</option>
+								<option value="19">19h</option>
+								<option value="20">20h</option>
+								<option value="21">21h</option>
+								<option value="22">22h</option>
+								<option value="23">23h</option>
+								<option value="24" selected="selected">24h</option>
+							</select>
+
+							<p>
+								Pick-up time: <b>0h</b> to <b>24h</b>
+							</p>
+						</form>
+					</div>
+				</div>
+
+				<div class="main-column-block price-facet" data-tracker="price-facet">
+					<h2 class="main-column-title">Price</h2>
+					<div>
+						<form class="form-inline" method="GET">
+							<div data-type="price" >
+								<select id="pmin" name="pmin">
+									<option value="18">18</option>
+									<option value="19">19</option>
+									<option value="20">20</option>
+									<option value="21">21</option>
+									<option value="22" selected="selected">22</option>
+									<option value="23">23</option>
+									<option value="24">24</option>
+									<option value="25">25</option>
+									<option value="26">26</option>
+									<option value="27">27</option>
+									<option value="28">28</option>
+									<option value="29">29</option>
+									<option value="30">30</option>
+									<option value="31">31</option>
+									<option value="32">32</option>
+									<option value="33">33</option>
+									<option value="34">34</option>
+								</select>
+								<select id="pmax" name="pmax">
+									<option value="18">18</option>
+									<option value="19">19</option>
+									<option value="20">20</option>
+									<option value="21">21</option>
+									<option value="22">22</option>
+									<option value="23">23</option>
+									<option value="24">24</option>
+									<option value="25">25</option>
+									<option value="26">26</option>
+									<option value="27">27</option>
+									<option value="28">28</option>
+									<option value="29">29</option>
+									<option value="30">30</option>
+									<option value="31">31</option>
+									<option value="32">32</option>
+									<option value="33">33</option>
+									<option value="34" selected="selected">34</option>
+								</select>
+								<p>
+									From
+									<b class="minValueDisplay">£22</b>
+									to
+									<b class="maxValueDisplay">£34</b>
+								</p>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-9">
+			<div style="border: 1px solid black; padding: 10px">
+				<div style="text-align: left">
+					<button class="btn btn-dark">Sort by date</button>
+					<button class="btn btn-dark">Sort by price</button>
+				</div>
+			</div>
+			<div class="row" ng-repeat="ride in rides" style="padding: 10px">
+				<div class="col-md-5">
+					{{ride.owner.name}}
+				</div>
+				<div  style="border-left: 1px solid black"  class="col-md-7">
+					{{ride.des}}<br>
+					{{ride.src}}
+				</div>
+				<div  style="border-bottom: 1px solid black">&nbsp;</div>
+			</div>
+		</div>
+	</div>
+
+
+</div>

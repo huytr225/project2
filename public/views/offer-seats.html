@@ -1,0 +1,80 @@
+<section id="welcome">
+	<div class="container">
+		<h2>Offer a ride</h2>
+		<hr class="sep">
+		<img class="img-responsive center-block wow fadeInUp" data-wow-delay=".3s" src="img/welcome/logo.png" alt="logo">
+		<div ng-hide=user>
+			<p>U must sign in to offer a ride</p>
+			<a href="/#/login"><button class="btn btn-dark">Click here</button></a>
+
+		</div>
+	</div>
+</section>
+<section ng-show=user>
+	<div class="container">
+		<div ng-show="messageLogin" id="login-alert" class="alert alert-danger col-sm-12">{{messageLogin}}</div>
+		<div class="row">
+
+			<form class="form-horizontal col-md-8" role="form">
+
+				<div style="margin-bottom: 25px" class="form-group" >
+					<label class="col-md-3 control-label">Pick-up point</label>
+					<div class="col-md-9">
+						<!-- <input  type="text" class="form-control" name="src" ng-model="src" required placeholder="Pick-up point">  -->
+						<input id="autocompletesrc" class="form-control" name="src" ng-model="src" required placeholder="Pick-up point"  type="text"></input>
+					</div>
+
+				</div>
+
+				<div style="margin-bottom: 25px" class="form-group">
+					<label class="col-md-3 control-label">Drop-off point</label>
+					<div class="col-md-9">
+						<!-- <input type="text" class="form-control" name="des" ng-model="des" required placeholder="Drop-off point">  -->
+						<input id="autocompletedes" class="form-control" name="des" ng-model="des" required placeholder="Drop-off point"  type="text"></input>
+					</div>
+				</div>
+				<div style="margin-bottom: 25px" class="form-group">
+					<label class="col-md-3 control-label">Price <i class="fa fa-usd" aria-hidden="true"></i></label>
+					<div class="col-md-9">
+						<input type="number" min="1" class="form-control" name="price" required ng-model="price" placeholder="Price">
+					</div>
+				</div>
+				<div style="margin-bottom: 25px" class="form-group">
+					<label class="col-md-3 control-label">Number of seats</label>
+					<div class="col-md-9">
+						<input type="number" min="1" max="3" class="form-control" name="price" required ng-model="numOfSeat" placeholder="Number of seats"> 
+					</div>
+				</div>
+
+
+				<div style="margin-bottom: 25px" class="form-group">
+					<label class="col-md-3 control-label">Travel date</label>
+					<div class="col-md-9 ">
+						<input ng-model="date" type="date" class="form-control col-md-4" required  placeholder="DD/MM/YYYY">
+					<!-- <span>
+					<select required="required" class="time-select"><option value="" selected="selected"></option><option value="0">00</option><option value="1">01</option><option value="2">02</option><option value="3">03</option><option value="4">04</option><option value="5">05</option><option value="6">06</option><option value="7">07</option><option value="8">08</option><option value="9">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option></select>
+					
+					<select required="required" class="time-select"><option value="" selected="selected"></option><option value="0">00</option><option value="10">10</option><option value="20">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option></select>
+				</span> -->
+					</div>
+				</div>
+			</form>
+			<div class="col-md-4" id="map-canvas" ></div>
+		</div>
+
+	</div>
+	
+	<div>
+		{{src}}<br>{{des}}<br>{{date}}
+		<div>
+
+		</div>
+		<center><button class="btn btn-dark" ng-click="offer();">offer a ride</button></center>
+	</div>
+</section>
+
+<!-- GOOGLE MAP -->
+
+<script>
+	
+</script>
