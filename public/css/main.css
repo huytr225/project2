@@ -8,7 +8,6 @@ body {
   color: #0d0d0d;
   overflow-x: hidden;
   padding-top: 80px;
-  margin-bottom:50px;
 }
 
 .sep {
@@ -27,7 +26,7 @@ body {
 
 #map-canvas{
   height: 400px;
-  width: 300px;
+  width: 360px;
 }
 
 /* ==========================================================================
@@ -186,7 +185,7 @@ Buttons Styles
 }
 
 /* ==========================================================================
-Layout 
+Layout
 ========================================================================== */
 .dark-bg {
   background: #24242a;
@@ -701,10 +700,11 @@ footer {
   background: #24242a;
   padding: 60px 0;
   text-align: center;
-  position:fixed;
   left:0px;
   bottom:0px;
   width:100%;
+
+  margin-top:50px;
 }
 footer h1 {
   /*text-transform: uppercase;*/
@@ -811,6 +811,7 @@ Media Queries Style
     font-size: 22px;
   }
 
+
   /*-- section styles --*/
   section h2 {
     font-size: 32px;
@@ -819,4 +820,28 @@ Media Queries Style
   #testimonials h5 {
     font-size: 18px;
   }
+}
+
+/* ==========================================================================
+Find ride Style
+========================================================================== */
+
+.find-filter {
+  text-decoration: none;
+  padding: 10px;
+  border-bottom: 1px solid black;
+}
+
+.find-filter:hover{
+ background-color: #1D2754;
+ color: white;
+ box-shadow: 10px 10px 20px #888888;
+}
+
+.a-filter-find {
+  color: black;
+}
+
+.a-filter-find:hover {
+  color: white;
 }

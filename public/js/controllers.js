@@ -1,9 +1,8 @@
-'use strict';
+  'use strict';
 
 angular.module('blablacar')
     .controller('UsersCtrl', ['$rootScope', '$scope', '$http', '$location', 'users', function($rootScope, $scope, $http, $location, users){
          $http.get("users/test").then(function(res){
-           console.log(res);
             if(res.data != "respond with a resource")
                 $rootScope.user = res.data.local.email;
          });
@@ -50,16 +49,24 @@ angular.module('blablacar')
             if(res.data != "respond with a resource")
                 $rootScope.user = res.data.local.email;
          });
-
+        $scope.detour = "NONE";
+        $scope.flexibility = "ON_TIME";
+        $scope.luggage = "Medium";
+        $scope.numOfSeat = 0;
         $scope.offer = function(){
+            var date = moment($scope.date).add($scope.hours, 'hours').add($scope.mins, 'minutes');
             if (confirm("Are you want to offer this ride?") == true) {
                var data = {
                     src: $scope.src,
                     des: $scope.des,
-                    date: $scope.date,
+                    date: date,
                     price: $scope.price,
                     numOfSeat: $scope.numOfSeat,
-                    owner: $rootScope.user
+                    owner: $rootScope.user,
+                    note: $scope.note,
+                    detour: $scope.detour,
+                    flexibility: $scope.flexibility,
+                    luggage: $scope.luggage
                 }
 
                 $http({
@@ -67,19 +74,20 @@ angular.module('blablacar')
                     url: "rides/offer",
                     data: data
                 }).success(function (data) {
+                    $location.path('/view/'+data._id);
                     return data;
                 }).error(function (err) {
                     alert("Unable to connect to the server.");
                 });
-                $location.path('/');
+                // $location.path('/');
             } else {
-                alert("I am an alert box!");
+                alert("Okay!");
             }
 
         }
 
         var map;
-        initialize();
+        // initialize();
         function initialize() {
             var autocompletesrc,autocompletedes;
             var lngSrc,latSrc,lngDes,latDes;
@@ -163,7 +171,7 @@ angular.module('blablacar')
          });
 
 
-        initialize();
+        // initialize();
         function initialize() {
             var autocompletesrc,autocompletedes;
 
@@ -181,40 +189,124 @@ angular.module('blablacar')
               });
         }
 
-        $scope.rides = [{
-          "numOfSeat": 1,
-          "price": 24,
-          "date": "2016-12-30T17:00:00Z",
-          "des": "Hà Nội, Việt Nam",
-          "src": "Bắc Ninh, Việt Nam",
-          "owner": {
-            "name": "admin"
-          }
-        },{
-          "numOfSeat": 1,
-          "price": 24,
-          "date": "2016-12-30T17:00:00Z",
-          "des": "Hà Nội, Việt Nam",
-          "src": "Bắc Ninh, Việt Nam",
-          "owner": {
-            "name": "admin"
-          }
-        },{
-          "numOfSeat": 1,
-          "price": 24,
-          "date": "2016-12-30T17:00:00Z",
-          "des": "Hà Nội, Việt Nam",
-          "src": "Bắc Ninh, Việt Nam",
-          "owner": {
-            "name": "admin"
-          }
-        }];
-
+        $scope.rides = [];
+        $scope.prices = [];
+        var prices = [];
+        $scope.hb = 0;
+        $scope.he = 24;
+        $scope.searched = false;
         $scope.find = function(){
           $http.get("rides/find/"+$scope.src+"/"+$scope.des).then(function(res){
               $scope.rides = res.data;
-              console.log(rides);
+              var rides = [];
+              for(var i = 0; i < $scope.rides.length; i++)
+                if(moment().diff($scope.rides[i].date) < 0)
+                  rides.push($scope.rides[i]);
+              $scope.rides = rides;
+              for(var i = 0; i < $scope.rides.length; i++){
+                  prices.push($scope.rides[i].price);
+                  $scope.rides[i].showdate = moment($scope.rides[i].date).format("HH:mm DD/MM/YYYY");
+                }
+              $scope.rides = rides;
+              $scope.pmin = Math.min.apply(null, prices);
+              $scope.pmax = Math.max.apply(null, prices);
+
+              $scope.prices = [];
+              for(var i = $scope.pmin; i <= $scope.pmax; i++)
+                $scope.prices.push(i);
            });
+           $scope.searched = true;
+           console.log($scope.rides)
         }
 
+        $scope.orderBy = function(x){
+          $scope.myOrderBy = x;
+        }
+
+        $scope.filterFunction = function(ride){
+          if(ride.price>=$scope.pmin && ride.price<=$scope.pmax){
+             if($scope.date==undefined || moment(ride.date).isSame($scope.date, 'day'))
+              if(moment(ride.date).hour() >= $scope.hb && moment(ride.date).hour() <= $scope.he )
+                return true;
+          }
+          return false;
+        }
+    }])
+    .controller('viewCtrl', ['$scope', '$http', '$location', '$stateParams', '$rootScope', function($scope, $http, $location, $stateParams, $rootScope){
+      $http.get("rides/find/"+$stateParams.id).then(function(res){
+          $scope.ride = res.data;
+          $scope.ride.showdate = moment($scope.ride.date).format("HH:mm DD/MM/YYYY");
+          console.log($scope.ride);
+       });
+
+      $scope.book = function(){
+        if(!$rootScope.user){
+          $location.path('/login');
+        } else if ($rootScope.user == $scope.ride.owner.name){
+          alert("You cannot book a ride you offer!!");
+
+        } else if($scope.ride.numOfSeat < 1){
+          alert("The seat is full!");
+        } else if(confirm("Are you want to offer this ride?") == true){
+          var data = {
+               rideid: $stateParams.id,
+               passenger: $rootScope.user
+           }
+           $http({
+               method: "POST",
+               url: "rides/book",
+               data: data
+           }).success(function (data) {
+
+               return data;
+           }).error(function (err) {
+               alert("Unable to connect to the server.");
+           });
+          $location.path('/offered');
+        }
+      }
+    }])
+    .controller('offeredCtrl', ['$scope', '$http', '$location', '$stateParams', '$rootScope', function($scope, $http, $location, $stateParams, $rootScope){
+      $scope.history = [];
+      $scope.current = [];
+      $http.get("users/offered/"+$rootScope.user).then(function(res){
+          $scope.rides = res.data;
+          for(var i = 0; i < $scope.rides.length; i++){
+            $scope.rides[i].showdate = moment($scope.rides[i].date).format("HH:mm DD/MM/YYYY");
+            if(moment().diff($scope.rides[i].date) > 0)
+              $scope.history.push($scope.rides[i]);
+            else
+              $scope.current.push($scope.rides[i]);
+          }
+          $scope.rides = $scope.current;
+       });
+       $scope.filterFunction = function(x){
+         if(x=='history')
+          $scope.rides = $scope.history;
+         else
+           $scope.rides = $scope.current;
+
+       }
+    }])
+    .controller('bookedCtrl', ['$scope', '$http', '$location', '$stateParams', '$rootScope', function($scope, $http, $location, $stateParams, $rootScope){
+      $scope.history = [];
+      $scope.current = [];
+      $http.get("users/booked/"+$rootScope.user).then(function(res){
+          $scope.rides = res.data;
+          for(var i = 0; i < $scope.rides.length; i++){
+            $scope.rides[i].showdate = moment($scope.rides[i].date).format("HH:mm DD/MM/YYYY");
+            if(moment().diff($scope.rides[i].date) > 0)
+              $scope.history.push($scope.rides[i]);
+            else
+              $scope.current.push($scope.rides[i]);
+          }
+          $scope.rides = $scope.current;
+       });
+       $scope.filterFunction = function(x){
+         if(x=='history')
+          $scope.rides = $scope.history;
+         else
+           $scope.rides = $scope.current;
+
+       }
     }]);

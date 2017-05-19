@@ -12,29 +12,70 @@
 </section>
 <section ng-show=user>
 	<div class="container">
-		<div ng-show="messageLogin" id="login-alert" class="alert alert-danger col-sm-12">{{messageLogin}}</div>
-		<div class="row">
+		<center><h2>Schedule</h2><center>
+			<div ng-show="messageLogin" id="login-alert" class="alert alert-danger col-sm-12">{{messageLogin}}</div>
+			<div class="row">
 
-			<form class="form-horizontal col-md-8" role="form">
+				<form class="form-horizontal col-md-8" role="form">
 
-				<div style="margin-bottom: 25px" class="form-group" >
-					<label class="col-md-3 control-label">Pick-up point</label>
-					<div class="col-md-9">
-						<!-- <input  type="text" class="form-control" name="src" ng-model="src" required placeholder="Pick-up point">  -->
-						<input id="autocompletesrc" class="form-control" name="src" ng-model="src" required placeholder="Pick-up point"  type="text"></input>
+					<div style="margin-bottom: 25px" class="form-group" >
+						<label class="col-md-3 control-label">Pick-up point</label>
+						<div class="col-md-9">
+							<!-- <input  type="text" class="form-control" name="src" ng-model="src" required placeholder="Pick-up point">  -->
+							<input id="autocompletesrc" class="form-control" name="src" ng-model="src" required placeholder="Pick-up point"  type="text"></input>
+						</div>
+
 					</div>
 
-				</div>
-
-				<div style="margin-bottom: 25px" class="form-group">
-					<label class="col-md-3 control-label">Drop-off point</label>
-					<div class="col-md-9">
-						<!-- <input type="text" class="form-control" name="des" ng-model="des" required placeholder="Drop-off point">  -->
-						<input id="autocompletedes" class="form-control" name="des" ng-model="des" required placeholder="Drop-off point"  type="text"></input>
+					<div style="margin-bottom: 25px" class="form-group">
+						<label class="col-md-3 control-label">Drop-off point</label>
+						<div class="col-md-9">
+							<!-- <input type="text" class="form-control" name="des" ng-model="des" required placeholder="Drop-off point">  -->
+							<input id="autocompletedes" class="form-control" name="des" ng-model="des" required placeholder="Drop-off point"  type="text"></input>
+						</div>
 					</div>
+
+					<!-- <div style="margin-bottom: 25px" class="form-group">
+						<label class="col-md-3 control-label">Stopovers</label>
+						<div class="col-md-9">
+							<input id="autocompleteso" class="form-control" name="stopovers" ng-model="stopovers" placeholder="Add a city on your route"  type="text"></input>
+						</div>
+					</div> -->
+
+
+					<div style="margin-bottom: 25px" class="form-group">
+						<label class="col-md-3 control-label">Travel date</label>
+						<div class="col-md-9">
+							<span class="col-md-6" style="padding: 0px;"><input ng-model="date" type="date" class="form-control" required  placeholder="DD/MM/YYYY">
+							</span>
+							<span class="col-md-3">
+								<select ng-model="hours" required class="form-control"><option value="" selected="selected"></option><option value="0">00</option><option value="1">01</option><option value="2">02</option><option value="3">03</option><option value="4">04</option><option value="5">05</option><option value="6">06</option><option value="7">07</option><option value="8">08</option><option value="9">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option></select>
+							</span>
+							<span class="col-md-3">
+								<select ng-model="mins" required class="form-control">
+									<option value="" selected="selected"></option>
+									<option value="0">00</option>
+									<option value="10">10</option>
+									<option value="20">20</option>
+									<option value="30">30</option>
+									<option value="40">40</option>
+									<option value="50">50</option>
+								</select>
+							</span>
+						</div>
+
+					</div>
+				</form>
+				<div class="col-md-4" style="border: 1px solid black; padding: 10px">
+					<center><b>My ride summary</b></center>
+					<div id="map-canvas" ></div>
 				</div>
+			</div>
+			<hr class="sep">
+			<center><h2>Details</h2><center>
+				<form class="form-horizontal" role="form">
 				<div style="margin-bottom: 25px" class="form-group">
-					<label class="col-md-3 control-label">Price <i class="fa fa-usd" aria-hidden="true"></i></label>
+					<label class="col-md-3 control-label">Price</label>
 					<div class="col-md-9">
 						<input type="number" min="1" class="form-control" name="price" required ng-model="price" placeholder="Price">
 					</div>
@@ -42,39 +83,59 @@
 				<div style="margin-bottom: 25px" class="form-group">
 					<label class="col-md-3 control-label">Number of seats</label>
 					<div class="col-md-9">
-						<input type="number" min="1" max="3" class="form-control" name="price" required ng-model="numOfSeat" placeholder="Number of seats"> 
+						<select ng-model="numOfSeat" required  class="form-control">
+							<option value="1">01</option>
+							<option value="2">02</option>
+							<option value="3">03</option>
+						</select>
 					</div>
 				</div>
-
-
 				<div style="margin-bottom: 25px" class="form-group">
-					<label class="col-md-3 control-label">Travel date</label>
-					<div class="col-md-9 ">
-						<input ng-model="date" type="date" class="form-control col-md-4" required  placeholder="DD/MM/YYYY">
-					<!-- <span>
-					<select required="required" class="time-select"><option value="" selected="selected"></option><option value="0">00</option><option value="1">01</option><option value="2">02</option><option value="3">03</option><option value="4">04</option><option value="5">05</option><option value="6">06</option><option value="7">07</option><option value="8">08</option><option value="9">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option></select>
-					
-					<select required="required" class="time-select"><option value="" selected="selected"></option><option value="0">00</option><option value="10">10</option><option value="20">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option></select>
-				</span> -->
+					<label class="col-md-3 control-label">Note about your ride</label>
+					<div class="col-md-9">
+						<textarea style="width:100%;" rows="4" ng-model="note" placeholder="Add more information"></textarea>
+					</div>
+				</div>
+				<div style="margin-bottom: 25px" class="form-group">
+					<label class="col-md-3 control-label">Max. luggage</label>
+					<div class="col-md-9">
+						<select ng-model="luggage" required  class="form-control">
+							<option value="Small">Small</option>
+							<option value="Medium" selected="selected">Medium</option>
+							<option value="Large">Large</option>
+						</select>
+					</div>
+				</div>
+				<div style="margin-bottom: 25px" class="form-group">
+					<label class="col-md-3 control-label">Pick-up flexibility</label>
+					<div class="col-md-9">
+						<select ng-model="flexibility" required  class="form-control">
+							<option value="ON_TIME" selected="selected">Right on time</option>
+							<option value="FIFTEEN_MINUTES">In a 15 minute window</option>
+							<option value="THIRTY_MINUTES">In a 30 minute window</option>
+							<option value="ONE_HOUR">In a 1 hour window</option>
+							<option value="TWO_HOURS">In a 2 hour window</option>
+						</select>
+					</div>
+				</div>
+				<div style="margin-bottom: 25px" class="form-group">
+					<label class="col-md-3 control-label">Possible detour</label>
+					<div class="col-md-9">
+						<select ng-model="detour" required  class="form-control">
+							<option value="NONE">None</option>
+							<option value="FIFTEEN_MINUTES" selected="selected">15 minutes max.</option>
+							<option value="THIRTY_MINUTES">30 minutes max.</option>
+							<option value="WHATEVER_IT_TAKES">Anything is fine</option>
+						</select>
 					</div>
 				</div>
 			</form>
-			<div class="col-md-4" id="map-canvas" ></div>
-		</div>
+				<center><button class="btn btn-dark" ng-click="offer();">offer a ride</button></center>
+			</div>
+		</section>
 
-	</div>
-	
-	<div>
-		{{src}}<br>{{des}}<br>{{date}}
-		<div>
+		<!-- GOOGLE MAP -->
 
-		</div>
-		<center><button class="btn btn-dark" ng-click="offer();">offer a ride</button></center>
-	</div>
-</section>
+		<script>
 
-<!-- GOOGLE MAP -->
-
-<script>
-	
-</script>
+		</script>

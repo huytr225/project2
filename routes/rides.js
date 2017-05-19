@@ -29,6 +29,29 @@ router.get('/find/:src/:des', function(req, res, next){
   });
 });
 
+router.get('/find/:id', function(req, res, next){
+  var id = req.params.id;
+  Ride.findById(id, function(error, ride) {
+      res.json(ride);
+  });
+});
+
+router.post('/book', function(req, res, next){
+  Ride.findById(req.body.rideid, function(error, ride) {
+      ride.numOfSeat = ride.numOfSeat - 1;
+      ride.save(function(err){
+        if(err) throw err;
+      });
+  });
+
+  User.findOne({ 'local.email': req.body.passenger }, function(err, user) {
+      user.rides.booked.push(req.body.rideid);
+      user.save(function(err){
+        if(err) throw err;
+      });
+  });
+
+});
 
 router.post('/offer', function(req, res, next){
 
@@ -40,17 +63,21 @@ router.post('/offer', function(req, res, next){
   newRide.numOfSeat = req.body.numOfSeat;
   newRide.owner.name = req.user.local.email;
   newRide.owner.id = req.user._id;
-
+  newRide.detail.luggage = req.body.lug;
+  newRide.detail.note = req.body.note;
+  newRide.detail.luggage = req.body.luggage;
+  newRide.detail.flexibility = req.body.flexibility;
+  newRide.detail.detour = req.body.detour;
   newRide.save(function(err, ride) {
     if (err)
       throw err;
     User.findOne({ 'local.email':  ride.owner.name }, function(err, user) {
         user.rides.offered.push(ride._id);
-        console.log(user);
         user.save(function(err){
           if(err) throw err;
         });
     });
+    res.json(ride);
   });
 
 });

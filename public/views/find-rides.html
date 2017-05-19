@@ -24,131 +24,98 @@
 		</div>
 		<button style="margin-bottom: 25px; margin-left: 10px" class="btn btn-dark col-md-2" ng-click="find()">Find a ride</button>
 	</form>
-	<div class="row">
-		<div class="col-md-3" style="border: 3px solid black;">
+	<div class="row" ng-show="searched">
+		<div class="col-md-3" style="border: 2px solid black;">
 			<div >
-				<h2 class="main-column-title">Date</h2>
+				<h3 class="main-column-title">Date</h3>
 				<form method="GET" class="date-form u-marginNone">
 					<div class="date-facet-input">
-						<input type="text" placeholder="dd/mm/yyyy">
+						<input ng-model="date" type="date" placeholder="dd/mm/yyyy">
 					</div>
 				</form>
 			</div>
 
 			<div>
 				<div>
-					<form class="form-inline" method="GET">
+					<form class="form-inline" method="GET" action="">
 						<div data-type="hours" >
-							<select id="hb" name="hb">
-								<option value="0" selected="selected">0h</option>
-								<option value="1">1h</option>
-								<option value="2">2h</option>
-								<option value="3">3h</option>
-								<option value="4">4h</option>
-								<option value="5">5h</option>
-								<option value="6">6h</option>
-								<option value="7">7h</option>
-								<option value="8">8h</option>
-								<option value="9">9h</option>
-								<option value="10">10h</option>
-								<option value="11">11h</option>
-								<option value="12">12h</option>
-								<option value="13">13h</option>
-								<option value="14">14h</option>
-								<option value="15">15h</option>
-								<option value="16">16h</option>
-								<option value="17">17h</option>
-								<option value="18">18h</option>
-								<option value="19">19h</option>
-								<option value="20">20h</option>
-								<option value="21">21h</option>
-								<option value="22">22h</option>
-								<option value="23">23h</option>
-								<option value="24" disabled="disabled">24h</option>
-							</select>
-							<select id="he" name="he">
-								<option value="0" disabled="disabled">0h</option>
-								<option value="1">1h</option>
-								<option value="2">2h</option>
-								<option value="3">3h</option>
-								<option value="4">4h</option>
-								<option value="5">5h</option>
-								<option value="6">6h</option>
-								<option value="7">7h</option>
-								<option value="8">8h</option>
-								<option value="9">9h</option>
-								<option value="10">10h</option>
-								<option value="11">11h</option>
-								<option value="12">12h</option>
-								<option value="13">13h</option>
-								<option value="14">14h</option>
-								<option value="15">15h</option>
-								<option value="16">16h</option>
-								<option value="17">17h</option>
-								<option value="18">18h</option>
-								<option value="19">19h</option>
-								<option value="20">20h</option>
-								<option value="21">21h</option>
-								<option value="22">22h</option>
-								<option value="23">23h</option>
-								<option value="24" selected="selected">24h</option>
-							</select>
+
+
 
 							<p>
-								Pick-up time: <b>0h</b> to <b>24h</b>
+								Pick-up time: <select id="hb" ng-model="hb" name="hb">
+									<option value="0" selected="selected">0h</option>
+									<option value="1">1h</option>
+									<option value="2">2h</option>
+									<option value="3">3h</option>
+									<option value="4">4h</option>
+									<option value="5">5h</option>
+									<option value="6">6h</option>
+									<option value="7">7h</option>
+									<option value="8">8h</option>
+									<option value="9">9h</option>
+									<option value="10">10h</option>
+									<option value="11">11h</option>
+									<option value="12">12h</option>
+									<option value="13">13h</option>
+									<option value="14">14h</option>
+									<option value="15">15h</option>
+									<option value="16">16h</option>
+									<option value="17">17h</option>
+									<option value="18">18h</option>
+									<option value="19">19h</option>
+									<option value="20">20h</option>
+									<option value="21">21h</option>
+									<option value="22">22h</option>
+									<option value="23">23h</option>
+									<option value="24" disabled="disabled">24h</option>
+								</select> to <select id="he" ng-model="he" name="he">
+									<option value="0" disabled="disabled">0h</option>
+									<option value="1">1h</option>
+									<option value="2">2h</option>
+									<option value="3">3h</option>
+									<option value="4">4h</option>
+									<option value="5">5h</option>
+									<option value="6">6h</option>
+									<option value="7">7h</option>
+									<option value="8">8h</option>
+									<option value="9">9h</option>
+									<option value="10">10h</option>
+									<option value="11">11h</option>
+									<option value="12">12h</option>
+									<option value="13">13h</option>
+									<option value="14">14h</option>
+									<option value="15">15h</option>
+									<option value="16">16h</option>
+									<option value="17">17h</option>
+									<option value="18">18h</option>
+									<option value="19">19h</option>
+									<option value="20">20h</option>
+									<option value="21">21h</option>
+									<option value="22">22h</option>
+									<option value="23">23h</option>
+									<option value="24" selected="selected">24h</option>
+								</select>
 							</p>
 						</form>
 					</div>
 				</div>
 
 				<div class="main-column-block price-facet" data-tracker="price-facet">
-					<h2 class="main-column-title">Price</h2>
+					<h3 class="main-column-title">Price</h3>
 					<div>
-						<form class="form-inline" method="GET">
+						<form class="form-inline">
 							<div data-type="price" >
-								<select id="pmin" name="pmin">
-									<option value="18">18</option>
-									<option value="19">19</option>
-									<option value="20">20</option>
-									<option value="21">21</option>
-									<option value="22" selected="selected">22</option>
-									<option value="23">23</option>
-									<option value="24">24</option>
-									<option value="25">25</option>
-									<option value="26">26</option>
-									<option value="27">27</option>
-									<option value="28">28</option>
-									<option value="29">29</option>
-									<option value="30">30</option>
-									<option value="31">31</option>
-									<option value="32">32</option>
-									<option value="33">33</option>
-									<option value="34">34</option>
-								</select>
-								<select id="pmax" name="pmax">
-									<option value="18">18</option>
-									<option value="19">19</option>
-									<option value="20">20</option>
-									<option value="21">21</option>
-									<option value="22">22</option>
-									<option value="23">23</option>
-									<option value="24">24</option>
-									<option value="25">25</option>
-									<option value="26">26</option>
-									<option value="27">27</option>
-									<option value="28">28</option>
-									<option value="29">29</option>
-									<option value="30">30</option>
-									<option value="31">31</option>
-									<option value="32">32</option>
-									<option value="33">33</option>
-									<option value="34" selected="selected">34</option>
-								</select>
 								<p>
 									From
-									<b class="minValueDisplay">£22</b>
+									<select id="pmin" ng-model="pmin" name="pmin">
+										<option ng-repeat="p in prices" value="{{p}}">{{p}}</option>
+									</select>
+									{{pmin}}
 									to
-									<b class="maxValueDisplay">£34</b>
+									<select id="pmax" ng-model="pmax" name="pmax">
+										<option ng-repeat="p in prices" value="{{p}}" >{{p}}</option>
+									</select>
 								</p>
 							</form>
 						</div>
@@ -157,24 +124,27 @@
 			</div>
 		</div>
 		<div class="col-md-9">
-			<div style="border: 1px solid black; padding: 10px">
-				<div style="text-align: left">
-					<button class="btn btn-dark">Sort by date</button>
-					<button class="btn btn-dark">Sort by price</button>
+			<div style="padding: 10px">
+				<div style="text-align: right">
+					<button class="btn btn-dark" ng-click="orderBy('date');">Sort by date</button>
+					<button class="btn btn-dark" ng-click="orderBy('price');">Sort by price</button>
 				</div>
 			</div>
-			<div class="row" ng-repeat="ride in rides" style="padding: 10px">
-				<div class="col-md-5">
-					{{ride.owner.name}}
-				</div>
-				<div  style="border-left: 1px solid black"  class="col-md-7">
-					{{ride.des}}<br>
-					{{ride.src}}
-				</div>
-				<div  style="border-bottom: 1px solid black">&nbsp;</div>
+			<div class="row find-filter" ng-repeat="ride in rides | filter: filterFunction | orderBy:myOrderBy" >
+				<a ng-href="#/view/{{ride._id}}" class="a-filter-find">
+					<div class="col-md-5">
+						{{ride.owner.name}}
+					</div>
+					<div  style="border-left: 1px solid black"  class="col-md-7">
+						{{ride.src}} -> {{ride.des}}<br>
+						{{ride.price}}.000VND per seat<br>
+						{{ride.numOfSeat}} seats left<br>
+						{{ride.showdate}}<br>
+					</div>
+				</a>
+			</div>
+			<h2 ng-show="rides.length == 0"><center>NOTHING FOUND <center></h2>
 			</div>
 		</div>
+
 	</div>
-
-
-</div>

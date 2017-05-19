@@ -1,0 +1,80 @@
+
+<section id="welcome">
+	<div class="container">
+		<h2>View a from <b>{{ride.owner.name}}</b></h2>
+		<hr class="sep">
+		<img class="img-responsive center-block wow fadeInUp" data-wow-delay=".3s" src="img/welcome/logo.png" alt="logo">
+		<h3>Love getting there</h3>
+	</div>
+</section>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-7" style="    line-height: 40px; margin-right: 15px; padding:15px; border: 1px solid gray;">
+			<div class="row">
+				<span class="col-md-3">
+					Pick-up point
+				</span>
+				<span class="col-md-9">
+					<i class="fa fa-circle-o" style="color:green;"></i> {{ride.src}}
+				</span>
+				<span class="col-md-3">
+					Drop-off point
+				</span>
+				<span class="col-md-9">
+					<i class="fa fa-circle-o" style="color:red;"></i> {{ride.des}}
+				</span>
+				<span class="col-md-3">
+					Date
+				</span>
+				<span class="col-md-9">
+					<i class="fa fa-calendar" aria-hidden="true"></i> {{ride.showdate}}
+				</span>
+				<span class="col-md-3">
+					Details
+				</span>
+				<span class="col-md-9">
+					<span class="col-md-6" style="padding-left:0px;">
+						<span ng-if="ride.detail.flexibility == 'ON_TIME'">Pick-up right on time</span>
+						<span ng-if="ride.detail.flexibility == 'FIFTEEN_MINUTES'">Pick-up in a 15 minute window</span>
+						<span ng-if="ride.detail.flexibility == 'THIRTY_MINUTES'">Pick-up In a 30 minute window</span>
+						<span ng-if="ride.detail.flexibility == 'ONE_HOUR'">Pick-up In a 1 hour window</span>
+						<span ng-if="ride.detail.flexibility == 'TWO_HOURS'">Pick-up in a 2 hour window</span>
+					</span>
+					<span class="col-md-6">
+						{{ride.detail.luggage}} (travel bag)
+					</span>
+					<span class="col-md-12" style="padding-left:0px;">
+						<span ng-if="ride.detail.detour == 'NONE'">No detour</span>
+						<span ng-if="ride.detail.detour == 'FIFTEEN_MINUTES'">Max. 15 min. detour</span>
+						<span ng-if="ride.detail.detour == 'THIRTY_MINUTES'">Max. 30 min. detour</span>
+						<span ng-if="ride.detail.detour == 'WHATEVER_IT_TAKES'">Don't care on detour</span>
+				</span>
+				<span class="col-md-12" style="padding-left:0px;">
+					<span ng-if="ride.detail.note">{{ride.detail.note}}</span>
+				</span>
+
+			</div>
+			<center><button class="btn btn-dark">Contact driver</button></center>
+		</div>
+		<div class="col-md-4" style="padding:15px; border: 1px solid gray;">
+			<div class="row">
+				<span class="col-md-9">
+					Price per seat
+				</span>
+				<span class="col-md-3">
+					<b>{{ride.price}}.000</b>
+				</span>
+			</div>
+			<hr class="sep">
+			<div>
+				<center>
+					Passengers on this ride:<br>
+					<b>{{ride.numOfSeat}}</b> seats left
+				</center>
+			</div>
+			<hr class="sep">
+			<center><button class="btn btn-dark" ng-click="book();">Book</button></center>
+		</div>
+	</div>
+</div>

@@ -22,9 +22,24 @@ angular.module('blablacar',[
                 templateUrl:'/views/offer-seats.html',
                 controller:'offerCtrl'
             })
+            .state('offered',{
+                url:"/offered",
+                templateUrl:'/views/offered.html',
+                controller:'offeredCtrl'
+            })
+            .state('booked',{
+                url:"/booked",
+                templateUrl:'/views/booked.html',
+                controller:'bookedCtrl'
+            })
             .state('find',{
                 url:"/find-rides",
                 templateUrl:'/views/find-rides.html',
                 controller:'findCtrl'
+            })
+            .state('view',{
+                url:"/view/:id",
+                templateUrl:'/views/view-ride.html',
+                controller:'viewCtrl'
             })
     }]);

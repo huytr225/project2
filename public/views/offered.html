@@ -1,0 +1,38 @@
+<section id="welcome">
+	<div class="container">
+		<h2>Rides offered</h2>
+		<hr class="sep">
+		<img class="img-responsive center-block wow fadeInUp" data-wow-delay=".3s" src="img/welcome/logo.png" alt="logo">
+		<h3>Love getting there</h3>
+	</div>
+</section>
+
+<div class="container">
+	<!-- <div ng-show="messageLogin" id="login-alert" class="alert alert-danger col-sm-12">{{messageLogin}}</div> -->
+
+	<div class="row">
+		<div class="col-md-9">
+			<div style="padding: 10px">
+				<div style="text-align: right">
+					<button class="btn btn-dark" ng-click="filterFunction('history');">History</button>
+					<button class="btn btn-dark" ng-click="filterFunction('current');">Current</button>
+				</div>
+			</div>
+			<div class="row find-filter" ng-repeat="ride in rides" >
+				<a ng-href="#/view/{{ride._id}}" class="a-filter-find">
+					<div class="col-md-5">
+						{{ride.owner.name}}
+					</div>
+					<div  style="border-left: 1px solid black"  class="col-md-7">
+						{{ride.src}} -> {{ride.des}}<br>
+						{{ride.price}}.000VND per seat<br>
+						{{ride.numOfSeat}} seats left<br>
+						{{ride.showdate}}<br>
+					</div>
+				</a>
+			</div>
+			<h2 ng-show="rides.length == 0"><center>NOTHING FOUND <center></h2>
+			</div>
+		</div>
+
+	</div>
